@@ -2,7 +2,12 @@
   "name": "shardus-global-server-dist",
   "version": "0.0.0",
   "description": "Compiled version of shardus-global-server.",
-  "main": "index.js",
+  "main": "./build/src/index.js",
+  "types": "./build/src/index.d.ts",
+  "files": [
+    "build/**/*",
+    "src/**/*"
+  ],
   "dependencies": {
     "@hapi/sntp": "3.1.1",
     "body-parser": "1.18.3",
@@ -13,6 +18,7 @@
     "got": "9.6.0",
     "log4js": "3.0.6",
     "log4js-extend": "0.2.1",
+    "runtypes": "^4.1.0",
     "sequelize": "4.41.0",
     "shardus-crypto-utils": "gitlab:shardus/shardus-crypto-utils",
     "shardus-net": "gitlab:shardus/shardus-net",
