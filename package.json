@@ -2,12 +2,7 @@
   "name": "shardus-global-server-dist",
   "version": "0.0.0",
   "description": "Compiled version of shardus-global-server.",
-  "main": "./build/src/index.js",
-  "types": "./build/src/index.d.ts",
-  "files": [
-    "build/**/*",
-    "src/**/*"
-  ],
+  "main": "./index.js",
   "dependencies": {
     "@hapi/sntp": "3.1.1",
     "body-parser": "1.18.3",
