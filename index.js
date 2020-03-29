@@ -1,4 +1,4 @@
 require('bytenode')
-const shardusFactory = require('./shardus.jsc')
+const shardus = require('./shardus.jsc')
 
-module.exports = shardusFactory
+module.exports = shardus
