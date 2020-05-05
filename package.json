@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "Compiled version of shardus-global-server.",
   "main": "./index.js",
-  "types": "./src/shardus/shardus-types.d.ts",
   "dependencies": {
     "@hapi/sntp": "3.1.1",
     "body-parser": "1.18.3",
