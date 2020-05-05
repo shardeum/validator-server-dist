@@ -29,12 +29,13 @@
         "gossipTimeout": 180,
         "maxSeedNodes": 10,
         "minNodesToAllowTxs": 3,
-        "minNodes": 20,
+        "minNodes": 15,
         "maxNodes": 30,
         "seedNodeOffset": 4,
-        "nodeExpiryAge": 180,
-        "maxNodesToRotate": 1,
-        "maxNodesPerCycle": 5,
+        "nodeExpiryAge": 30,
+        "maxJoinedPerCycle": 1,
+        "maxSyncingPerCycle": 5,
+        "maxRotatedPerCycle": 1,
         "maxPercentOfDelta": 40,
         "scaleReqsNeeded": 5,
         "maxScaleReqs": 10,
@@ -56,7 +57,7 @@
         "console": false
     },
     "debug": {
-        "loseReceiptChance": 0.000,
+        "loseReceiptChance": 0.0,
         "loseTxChance": 0.0,
         "canDataRepair": true
     },
