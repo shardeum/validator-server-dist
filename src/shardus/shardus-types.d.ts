@@ -100,11 +100,12 @@ declare namespace Shardus {
         /**
          * A function responsible for validation the incoming transaction fields
          */
-        validateTxnFields: (inTx: Shardus.IncomingTransaction) => Shardus.IncomingTransactionResult;
+        validateTxnFields: (inTx: Shardus.OpaqueTransaction) => Shardus.IncomingTransactionResult;
         /**
          * A function responsible for applying an accepted transaction
          */
-        apply: (inTx: Shardus.IncomingTransaction, wrappedStates: any) => Shardus.ApplyResponse;
+        apply: (inTx: Shardus.OpaqueTransaction, // it is better to not use IncomingTransaction,
+        wrappedStates: any) => Shardus.ApplyResponse;
         updateAccountFull: (wrappedState: WrappedResponse, localCache: any, applyResponse: Shardus.ApplyResponse) => void;
         updateAccountPartial: (wrappedState: WrappedResponse, localCache: any, applyResponse: Shardus.ApplyResponse) => void;
         getRelevantData: (accountId: string, tx: object) => WrappedResponse;
@@ -195,6 +196,7 @@ declare namespace Shardus {
         data: any;
         timestamp: number;
         hash: string;
+        isGlobal: boolean;
     }
     interface WrappedData {
         /** Account ID */
@@ -205,6 +207,8 @@ declare namespace Shardus {
         data: any;
         /** Timestamp */
         timestamp: number;
+        /** optional data related to sync process */
+        syncData?: any;
     }
     interface WrappedResponse extends WrappedData {
         accountCreated: boolean;
@@ -353,6 +357,8 @@ declare namespace Shardus {
             maxScaleReqs?: number;
             /** The amountToScale parameter is an Integer specifying the amount of nodes to add or remove from the number of desired nodes the network wants. */
             amountToScale?: number;
+            /** If witenss mode is true, node will not join the network but help other nodes to sync the data */
+            startInWitnessMode?: boolean;
         };
         /** Server IP configuration */
         ip?: {
