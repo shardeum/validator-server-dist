@@ -395,6 +395,8 @@ declare namespace Shardus {
             loseTxChance?: number;
             /** The canDataRepair parameter is a boolean that allows dataRepair to be turned on/off by the application (true = on | false = off) */
             canDataRepair?: boolean;
+            /** Disable voting consensus for TXs (true = on | false = off) */
+            debugNoTxVoting?: boolean;
         };
         /** Options for the statistics module */
         statistics?: {
