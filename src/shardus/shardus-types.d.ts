@@ -137,6 +137,9 @@ declare namespace Shardus {
          * If it is not the first node it could use getLocalOrRemote() to query data it needs.
          */
         sync: () => any;
+        dataSummaryInit: (blob: any, accountData: any) => void;
+        dataSummaryUpdate: (blob: any, accountDataBefore: any, accountDataAfter: any) => void;
+        txSummaryUpdate: (blob: any, tx: any, wrappedStates: any) => void;
     }
     interface TransactionKeys {
         /**
@@ -215,6 +218,8 @@ declare namespace Shardus {
         isPartial: boolean;
         userTag?: any;
         localCache?: any;
+        prevStateId?: string;
+        prevDataCopy?: any;
     }
     interface WrappedDataFromQueue extends WrappedData {
         /** is this account still in the queue */
