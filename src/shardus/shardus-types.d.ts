@@ -104,8 +104,19 @@ declare namespace Shardus {
         /**
          * A function responsible for applying an accepted transaction
          */
-        apply: (inTx: Shardus.OpaqueTransaction, // it is better to not use IncomingTransaction,
-        wrappedStates: any) => Shardus.ApplyResponse;
+        apply: (inTx: Shardus.OpaqueTransaction, wrappedStates: any) => Shardus.ApplyResponse;
+        /**
+         * This is called after consensus has received or produced a receipt and the trasaction is approved.
+         * Do not change any of the values passes in.
+         * This is a place to generate other transactions, or do off chain work like send and email.
+         */
+        transactionReceiptPass: (inTx: Shardus.OpaqueTransaction, wrappedStates: any, applyResponse: Shardus.ApplyResponse) => void;
+        /**
+         * This is called after consensus has received or produced a receipt and the trasaction fails.
+         * Do not change any of the values passes in.
+         * This is a place to generate other transactions, or do off chain work like send and email.
+         */
+        transactionReceiptFail: (inTx: Shardus.OpaqueTransaction, wrappedStates: any, applyResponse: Shardus.ApplyResponse) => void;
         updateAccountFull: (wrappedState: WrappedResponse, localCache: any, applyResponse: Shardus.ApplyResponse) => void;
         updateAccountPartial: (wrappedState: WrappedResponse, localCache: any, applyResponse: Shardus.ApplyResponse) => void;
         getRelevantData: (accountId: string, tx: object) => WrappedResponse;
@@ -191,6 +202,11 @@ declare namespace Shardus {
          * Account data array
          */
         accountData: WrappedResponse[];
+        /**
+         * a blob for the app to define.
+         * This gets passed to post apply
+         */
+        appDefinedData: any;
     }
     interface AccountData {
         /** Account ID */
@@ -421,6 +437,14 @@ declare namespace Shardus {
             failReceiptChance?: number;
             /** chance to flip our vote */
             voteFlipChance?: number;
+            /** use the new stats data for partition state reports to monitor server */
+            useNewParitionReport?: boolean;
+            /** is the old partition checking system enabled */
+            oldPartitionSystem?: boolean;
+            /** slow old reporting that queries sql for account values */
+            dumpAccountReportFromSQL?: boolean;
+            /** enable the built in profiling */
+            profiler?: boolean;
         };
         /** Options for the statistics module */
         statistics?: {
