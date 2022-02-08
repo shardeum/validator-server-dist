@@ -1,11 +1,12 @@
 {
   "name": "shardus-global-server-dist",
-  "version": "2.2.1",
+  "version": "2.4.0",
   "engines": {
-    "node": "^12.18.3"
+    "node": "^16.11.1"
   },
   "description": "Compiled version of shardus-global-server.",
   "main": "./index.js",
+  "types": "./index.d.ts",
   "dependencies": {
     "@hapi/sntp": "^3.1.1",
     "body-parser": "^1.18.3",
@@ -14,16 +15,17 @@
     "express": "^4.16.4",
     "fast-stable-stringify": "^1.0.0",
     "got": "^9.6.0",
-    "log4js": "^3.0.6",
+    "log4js": "^6.4.1",
     "log4js-extend": "^0.2.1",
     "nat-api": "^0.3.0",
-    "sequelize": "^5.21.7",
-    "shardus-crypto-utils": "git+https://gitlab.com/shardus/shardus-crypto-utils.git#semver:^3.0.1",
-    "shardus-net": "git+https://gitlab.com/shardus/shardus-net.git#semver:^1.0.1",
-    "socket.io": "^2.3.0",
-    "sqlite3": "^5.0.0",
+    "sequelize": "^6.15.1",
+    "shardus-crypto-utils": "git+https://gitlab.com/shardus/shardus-crypto-utils.git#node-v16",
+    "shardus-net": "git+https://gitlab.com/shardus/shardus-net.git#rust-impl",
+    "shardus-types": "git+https://gitlab.com/shardus/shardus-types.git#node-v16",
+    "socket.io": "^2.4.1",
+    "sqlite3": "^4.2.0",
     "tar-fs": "^2.1.0",
     "trie-prefix-tree": "^1.5.1",
-    "bytenode": "1.1.6"
+    "bytenode": "1.3.3"
   }
 }

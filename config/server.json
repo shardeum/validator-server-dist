@@ -31,6 +31,9 @@
         "difficulty": 2,
         "queryDelay": 1,
         "gossipRecipients": 8,
+        "gossipFactor": 4,
+        "gossipStartSeed": 15,
+        "gossipSeedFallof": 15,
         "gossipTimeout": 180,
         "maxSeedNodes": 10,
         "minNodesToAllowTxs": 3,
@@ -42,9 +45,11 @@
         "maxSyncingPerCycle": 5,
         "maxRotatedPerCycle": 1,
         "maxPercentOfDelta": 40,
-        "scaleReqsNeeded": 5,
-        "maxScaleReqs": 10,
-        "amountToScale": 1,
+        "minScaleReqsNeeded": 5,
+        "maxScaleReqs": 200,
+        "scaleConsensusRequired": 0.25,
+        "amountToGrow": 1,
+        "amountToShrink": 1,
         "startInWitnessMode": false
     },
     "ip": {
@@ -54,7 +59,7 @@
         "internalPort": 10001
     },
     "network": {
-        "timeout": 2
+        "timeout": 5
     },
     "reporting": {
         "report": true,
@@ -79,11 +84,16 @@
     },
     "rateLimiting": {
         "limitRate": true,
-        "loadLimit": 0.5
+        "loadLimit": {
+            "internal": 0.5,
+            "external": 0.4,
+            "txTimeInQueue": 0.2,
+            "queueLength": 0.2
+        }
     },
     "stateManager": {
-        "stateTableBucketSize": 200,
-        "accountBucketSize": 50
+        "stateTableBucketSize": 500,
+        "accountBucketSize": 200
     },
     "sharding": {
         "nodesPerConsensusGroup": 5
