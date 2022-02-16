@@ -23,46 +23,48 @@ export interface App {
         id: string;
         keys: TransactionKeys;
     };
-    validateTransaction: (...data: any) => any;
+    validateTransaction?: (...data: any) => any;
     /**
      * A function responsible for validation the incoming transaction fields
      */
-    validateTxnFields: (inTx: OpaqueTransaction) => IncomingTransactionResult;
+    validateTxnFields?: (inTx: OpaqueTransaction) => IncomingTransactionResult;
     /**
      * A function responsible for applying an accepted transaction
      */
-    apply: (inTx: OpaqueTransaction, wrappedStates: any) => ApplyResponse;
+    apply: (inTx: OpaqueTransaction, wrappedStates: {
+        [accountId: string]: WrappedData;
+    }) => ApplyResponse;
     /**
      * This is called after consensus has received or produced a receipt and the trasaction is approved.
      * Do not change any of the values passes in.
      * This is a place to generate other transactions, or do off chain work like send and email.
      */
-    transactionReceiptPass: (inTx: OpaqueTransaction, wrappedStates: any, applyResponse: ApplyResponse) => void;
+    transactionReceiptPass?: (inTx: OpaqueTransaction, wrappedStates: any, applyResponse: ApplyResponse) => void;
     /**
      * This is called after consensus has received or produced a receipt and the trasaction fails.
      * Do not change any of the values passes in.
      * This is a place to generate other transactions, or do off chain work like send and email.
      */
-    transactionReceiptFail: (inTx: OpaqueTransaction, wrappedStates: any, applyResponse: ApplyResponse) => void;
+    transactionReceiptFail?: (inTx: OpaqueTransaction, wrappedStates: any, applyResponse: ApplyResponse) => void;
     updateAccountFull: (wrappedState: WrappedResponse, localCache: any, applyResponse: ApplyResponse) => void;
     updateAccountPartial: (wrappedState: WrappedResponse, localCache: any, applyResponse: ApplyResponse) => void;
     getRelevantData: (accountId: string, tx: object) => WrappedResponse;
     /**
      * A function that returns the Keys for the accounts involved in the transaction
      */
-    getKeyFromTransaction: (inTx: OpaqueTransaction) => TransactionKeys;
+    getKeyFromTransaction?: (inTx: OpaqueTransaction) => TransactionKeys;
     /**
      * A function that returns the State ID for a given Account Address
      */
-    getStateId: (accountAddress: string, mustExist?: boolean) => string;
+    getStateId?: (accountAddress: string, mustExist?: boolean) => string;
     /**
      * A function that returns the timestamp for a given Account Address
      */
-    getAccountTimestamp: (accountAddress: string, mustExist?: boolean) => number;
+    getAccountTimestamp?: (accountAddress: string, mustExist?: boolean) => number;
     /**
      * A function that allows the app to look at a passed in account ane return the hash and timestamp
      */
-    getTimestampAndHashFromAccount: (account: any) => {
+    getTimestampAndHashFromAccount?: (account: any) => {
         timestamp: number;
         hash: string;
     };
@@ -72,23 +74,23 @@ export interface App {
     close: () => void;
     getAccountData: (accountStart: string, accountEnd: string, maxRecords: number) => WrappedData[];
     getAccountDataByRange: (accountStart: string, accountEnd: string, tsStart: number, tsEnd: number, maxRecords: number) => WrappedData[];
-    calculateAccountHash: (account: any) => string;
-    setAccountData: (accountRecords: any[]) => void;
-    resetAccountData: (accountRecords: any[]) => void;
+    calculateAccountHash: (account: unknown) => string;
+    setAccountData: (accountRecords: unknown[]) => void;
+    resetAccountData: (accountRecords: unknown[]) => void;
     deleteAccountData: (addressList: string[]) => void;
     getAccountDataByList: (addressList: string[]) => WrappedData[];
     deleteLocalAccountData: () => void;
-    getAccountDebugValue: (wrappedAccount: any) => string;
-    canDebugDropTx: (tx: any) => boolean;
+    getAccountDebugValue: (wrappedAccount: WrappedData) => string;
+    canDebugDropTx?: (tx: unknown) => boolean;
     /**
      * This gives the application a chance to sync or load initial data before going active.
      * If it is the first node it can use .set() to set data
      * If it is not the first node it could use getLocalOrRemote() to query data it needs.
      */
-    sync: () => any;
-    dataSummaryInit: (blob: any, accountData: any) => void;
-    dataSummaryUpdate: (blob: any, accountDataBefore: any, accountDataAfter: any) => void;
-    txSummaryUpdate: (blob: any, tx: any, wrappedStates: any) => void;
+    sync?: () => any;
+    dataSummaryInit?: (blob: any, accountData: any) => void;
+    dataSummaryUpdate?: (blob: any, accountDataBefore: any, accountDataAfter: any) => void;
+    txSummaryUpdate?: (blob: any, tx: any, wrappedStates: any) => void;
 }
 export interface TransactionKeys {
     /**
@@ -134,7 +136,7 @@ export interface ApplyResponse {
      * a blob for the app to define.
      * This gets passed to post apply
      */
-    appDefinedData: any;
+    appDefinedData: unknown;
 }
 export interface AccountData {
     /** Account ID */
@@ -151,7 +153,7 @@ export interface AccountData {
 export interface AccountsCopy {
     accountId: string;
     cycleNumber: number;
-    data: any;
+    data: unknown;
     timestamp: number;
     hash: string;
     isGlobal: boolean;
@@ -162,7 +164,7 @@ export interface WrappedData {
     /** hash of the data blob */
     stateId: string;
     /** data blob opaqe */
-    data: any;
+    data: unknown;
     /** Timestamp */
     timestamp: number;
     /** optional data related to sync process */
@@ -192,7 +194,7 @@ export interface AccountData2 {
     /** Account hash */
     hash: string;
     /** Account data */
-    accountData: any;
+    accountData: unknown;
     /** localCache */
     localCache: any;
 }

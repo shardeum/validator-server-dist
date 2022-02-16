@@ -64,7 +64,7 @@ declare class Shardus extends EventEmitter {
      * This function is what the app developer uses to setup all the SDK functions used by shardus
      * @typedef {import('./index').App} App
      */
-    setup(app: any): this;
+    setup(app: ShardusTypes.App): this;
     /**
      * Calling this function will start the network
      * @param {*} exitProcOnFail Exit the process if an error occurs
@@ -269,3 +269,4 @@ declare class Shardus extends EventEmitter {
     tryInvolveAccount(txID: string, address: string, isRead: boolean): boolean;
 }
 export default Shardus;
+export * as ShardusTypes from '../shardus/shardus-types';
