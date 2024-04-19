@@ -14,7 +14,7 @@
     "deepmerge": "^4.2.2",
     "express": "^4.16.4",
     "fast-stable-stringify": "^1.0.0",
-    "got": "^9.6.0",
+    "got": "^14.2.1",
     "log4js": "^6.4.1",
     "log4js-extend": "^0.2.1",
     "nat-api": "^0.3.0",
